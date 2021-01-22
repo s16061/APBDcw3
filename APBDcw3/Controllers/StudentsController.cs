@@ -67,7 +67,7 @@ namespace Cw3.Controllers
                         st.IndexNumber = dr["IndexNumber"].ToString();
                         st.FirstName = dr["FirstName"].ToString();
                         st.LastName = dr["LastName"].ToString();
-                        st.Semester = dr["Semester"].ToString();
+                        st.Semester = int.Parse(dr["Semester"].ToString());
                         list.Add(st);
 
 

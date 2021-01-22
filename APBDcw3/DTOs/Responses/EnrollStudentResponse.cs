@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Cw3.Models
+namespace APBDcw3.DTOs.Responses
 {
-    public class Students
+    public class EnrollStudentResponse
     {
-        public string FirstName { get; set; }
-        public int IdStudent { get; set; }
-        public string LastName { get; set; }
         public string IndexNumber { get; set; }
-        public DateTime Birthdate { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Studies { get; set; }
-        public int Semester { get; set; }
     }
 }
