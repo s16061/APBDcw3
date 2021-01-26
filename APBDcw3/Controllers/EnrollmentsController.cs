@@ -8,6 +8,7 @@ using APBDcw3.DTOs.Requests;
 using APBDcw3.DTOs.Responses;
 using APBDcw3.Services;
 using Cw3.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
@@ -26,6 +27,7 @@ namespace APBDcw3.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "employee")]
         public IActionResult EnrollStudent(EnrollStudentRequest request)
         {
             var response = _service.EnrollStudent(request);
@@ -42,6 +44,7 @@ namespace APBDcw3.Controllers
 
 
         [HttpPost("promotions")]
+        [Authorize(Roles = "employee")]
         public IActionResult PromoteStudent(PromotionStudentRequest request)
         {
             var response = _service.PromoteStudent(request);

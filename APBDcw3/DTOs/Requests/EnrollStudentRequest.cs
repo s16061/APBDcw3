@@ -8,7 +8,7 @@ namespace APBDcw3.DTOs.Requests
 {
     public class EnrollStudentRequest
     {
-        [Required(ErrorMessage = "Musisz podać s")]
+        [Required(ErrorMessage = "Musisz podać indeks")]
         public string IndexNumber { get; set; }
         [Required(ErrorMessage = "Musisz podać imię")]
         public string FirstName { get; set; }
