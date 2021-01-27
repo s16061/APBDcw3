@@ -14,14 +14,16 @@ namespace APBDcw3.DAL
         private static IEnumerable<Students> _students;
 
         static MockDbService()
-        {
+        {/*
             _students = new List<Students>
             {
                 new Students{IdStudent=1, FirstName="Jan", LastName="Kowalski"},
                 new Students{IdStudent=2, FirstName="Anna", LastName="Malewski"},
                 new Students{IdStudent=3, FirstName="Andrzej", LastName="Andrzejewicz"}
             };
+            */
         }
+        
 
         public int DeleteRefreshToken(string refreshToken)
         {

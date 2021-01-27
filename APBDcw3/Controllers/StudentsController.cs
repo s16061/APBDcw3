@@ -7,6 +7,7 @@ using Cw3.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -37,8 +38,44 @@ namespace Cw3.Controllers
             _dbService = dbService;
         }
          
+        [HttpGet("ef/list")]
+        public ActionResult GetStudentEF()
+        {
+            var db = new s16061Context();
+            var res = db.Students.ToList();
+            return Ok(res);
 
+        }
 
+        [HttpPut("ef/update/{id}")]
+        public ActionResult UpdateStudentEF(UpdateStudentRequest request)
+        {
+            var db = new s16061Context();
+            var res = new Students {
+            IndexNumber = request.IndexNumber,
+            FirstName = request.FirstName,
+            LastName = request.LastName,
+            Birthdate = request.Birthdate,
+            IdEnrollment = request.IdEnrollment
+                                    };
+            db.Entry(res).State = EntityState.Modified;
+            db.SaveChanges();
+            return Ok("Zaktualizowano");
+
+        }
+        [HttpDelete("ef/delete/{id}")]
+        public ActionResult DeleteStudentEF(string id)
+        {
+            var db = new s16061Context();
+            var res = new Students
+            {
+                IndexNumber = id
+            };
+            db.Attach(res);
+            db.Remove(res);
+            db.SaveChangesAsync();
+            return Ok("Usunieto");
+        }
         [HttpPost("login")]
         public IActionResult Login(LoginRequest request)
         {
@@ -158,7 +195,7 @@ namespace Cw3.Controllers
                 }
             }
         }
-
+        /*
         [HttpGet("enrollment/{id}")]
         public IActionResult GetStudentEnrollment(int id)
         {
@@ -187,6 +224,7 @@ namespace Cw3.Controllers
                 }
             }
         }
+        */
 
         [HttpGet("{id}")]
         public IActionResult GetStudent(int id)
@@ -204,18 +242,20 @@ namespace Cw3.Controllers
             student.IndexNumber = $"s{new Random().Next(1, 2000)}";
             return Ok(student);
         }
+        /*
         [HttpPut("{id}")]
         public IActionResult UpdateStudent(int id, Students student)
         {
             if (id < 3)
             {
-                student.IdStudent = id;
+                student.IndexNumber = id;
                 return Ok(student);
             }
             else
                 return NotFound("Student o tym id nie został znaleziony");
             
         }
+        */
         [HttpDelete("{id}")]
         public IActionResult DeleteStudent(int id)
         {
